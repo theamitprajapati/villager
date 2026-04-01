@@ -30,7 +30,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
-          username: amit
+          username: ubuntu
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /home/ubuntu/villager
