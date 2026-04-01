@@ -13,9 +13,7 @@ on:
   push:
     branches:
       - main
-  comment:
-    branches:
-      - main
+
 
 jobs:
   deploy:
