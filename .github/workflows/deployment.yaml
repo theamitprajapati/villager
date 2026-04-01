@@ -1,0 +1,37 @@
+name: Manual Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the deployment environment'
+        type: choice
+        options:
+        - test
+        - staging
+        - production
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Perform deployment
+        run: echo "Deploying to ${{ inputs.environment }}"
+
+      - name: Deploy Via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: amit
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/villager
+            git pull
+            
