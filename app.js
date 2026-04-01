@@ -1,7 +1,12 @@
 const express = require('express');
 const UAParser = require('ua-parser-js');
+require("./db")
+const User = require('./User');
+
 
 const app = express();
+
+
 
 app.get('/track', (req, res) => {
     const userAgent = req.headers['user-agent'];
@@ -19,6 +24,16 @@ app.get('/track', (req, res) => {
     console.log("User Info:", data);
 
     // You can store in DB here
+    try {
+        User.create([{
+            ip: req.ip,
+            name: req.ip,
+            agent: userAgent,
+            data: ""
+        }])
+    } catch (err) {
+        console.log("erro", err)
+    }
 
     res.send("Tracking captured ✅");
 });
