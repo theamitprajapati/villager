@@ -36,4 +36,5 @@ jobs:
             cd /home/ubuntu/villager
             git pull
             docker build -t myapp .
+            docker run -d -p 9000:9000 myapp
             
